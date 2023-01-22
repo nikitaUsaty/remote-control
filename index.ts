@@ -1,5 +1,6 @@
 import { httpServer } from './src/http_server/index'
 import { WebSocketServer } from 'ws'
+import { controller } from './src/controller'
 
 const HTTP_PORT = 8181
 
@@ -12,5 +13,6 @@ wss.on('connection', function connection(ws) {
   ws.send('Connected')
   ws.on('message', function message(data) {
     console.log('received: %s', data.toString())
+    controller(data.toString(), ws)
   })
 })
