@@ -2,6 +2,8 @@ import { mouse, left, right, up, down } from '@nut-tree/nut-js'
 import { drawCircle } from './drawing/circle'
 import { drawRectangular } from './drawing/rectangle'
 import { drawSquare } from './drawing/square'
+import { printScreen } from './printScr/printScr'
+
 import { parseData } from './utils/parseData'
 
 export async function controller(data: string, ws: any) {
@@ -40,7 +42,10 @@ export async function controller(data: string, ws: any) {
       await drawCircle(+offset)
       ws.send(direction)
       break
-
+    case 'prnt_scrn':
+      const screenShot = await printScreen()
+      ws.send(screenShot)
+      break
     default:
       console.log('Unknown command')
       break
